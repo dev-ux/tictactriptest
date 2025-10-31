@@ -22,6 +22,32 @@ app.use(express.json({ limit: '10mb' }));
 app.use('/api/token', authRouter);
 app.use('/api/justify', justifyRouter);
 
+// Route racine avec documentation de l'API
+app.get('/', (req: Request, res: Response) => {
+  res.status(200).json({
+    name: 'Text Justification API',
+    version: '1.0.0',
+    endpoints: [
+      {
+        method: 'POST',
+        path: '/api/token',
+        description: 'Get authentication token',
+        body: { email: 'string (required)' }
+      },
+      {
+        method: 'POST',
+        path: '/api/justify',
+        description: 'Justify text',
+        headers: {
+          'Authorization': 'Bearer YOUR_TOKEN',
+          'Content-Type': 'text/plain'
+        },
+        body: 'Your text to justify here.'
+      }
+    ]
+  });
+});
+
 // Health check
 app.get('/health', (req: Request, res: Response) => {
   res.status(200).json({ status: 'ok' });
