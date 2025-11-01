@@ -14,9 +14,9 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.text({ 
   type: 'text/plain',
-  limit: '10mb' // Augmente la limite à 10 Mo
+  limit: '50mb' // Augmente la limite à 10 Mo
 }));
-app.use(express.json({ limit: '10mb' }));
+app.use(express.json({ limit: '50mb' }));
 
 // Routes
 app.use('/api/token', authRouter);
