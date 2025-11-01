@@ -3,20 +3,21 @@
   "builds": [
     {
       "src": "dist/index.js",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "maxLambdaSize": "50mb"
+      }
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/dist/index.js"
+      "dest": "/dist/index.js",
+      "headers": {
+        "Content-Type": "text/plain"
+      },
+      "methods": ["POST"],
+      "maxBodyLength": 52428800
     }
-  ],
-  "functions": {
-    "dist/index.js": {
-      "maxDuration": 10,
-      "memory": 1024,
-      "maxRequestBodySize": 52428800
-    }
-  }
+  ]
 }
