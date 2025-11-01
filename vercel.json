@@ -3,21 +3,13 @@
   "builds": [
     {
       "src": "dist/index.js",
-      "use": "@vercel/node",
-      "config": {
-        "maxLambdaSize": "100mb"
-      }
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/dist/index.js",
-      "headers": {
-        "Content-Type": "text/plain"
-      },
-      "methods": ["POST"],
-      "maxBodyLength": 104857600
+      "dest": "/dist/index.js"
     }
   ]
 }
